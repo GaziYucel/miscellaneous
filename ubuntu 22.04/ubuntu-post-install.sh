@@ -106,8 +106,10 @@ echo '******************************'
 echo libreoffice
 echo '******************************'
 
-wget -c https://download.documentfoundation.org/libreoffice/stable/7.6.4/deb/x86_64/LibreOffice_7.6.4_Linux_x86-64_deb.tar.gz -O - | tar -xz
-sudo dpkg -i LibreOffice_7.6.4.1_Linux_x86-64_deb/DEBS/*.deb
+sudo rm -rf /tmp/libreoffice
+mkdir /tmp/libreoffice
+wget -c https://download.documentfoundation.org/libreoffice/stable/7.6.4/deb/x86_64/LibreOffice_7.6.4_Linux_x86-64_deb.tar.gz -O - | tar -xz -C /tmp/libreoffice --strip-components=1
+sudo dpkg -i /tmp/libreoffice/DEBS/*.deb
 
 echo '******************************'
 echo bruno
@@ -183,8 +185,14 @@ echo '******************************'
 echo bluegriffon
 echo '******************************'
 
-sudo wget -O bluegriffon.deb http://bluegriffon.org/freshmeat/3.1/bluegriffon-3.1.Ubuntu18.04-x86_64.deb
-sudo apt install ./bluegriffon.deb -y
+wget -O /tmp/bluegriffon.deb http://bluegriffon.org/freshmeat/3.1/bluegriffon-3.1.Ubuntu18.04-x86_64.deb
+sudo apt install /tmp/bluegriffon.deb -y
+
+echo '******************************'
+echo vscodium
+echo '******************************'
+wget -O /tmp/vscodium https://github.com/VSCodium/vscodium/releases/download/1.85.1.23348/codium_1.85.1.23348_amd64.deb
+sudo apt install /tmp/bluegriffon.deb -y
 
 echo '******************************'
 echo flatpak
