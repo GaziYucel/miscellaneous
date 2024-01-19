@@ -59,16 +59,17 @@ sudo apt install kate -y
 sudo apt install workrave -y
 sudo apt install nextcloud-desktop -y
 sudo apt install gnome-tweaks -y
+sudo apt install keepassxc -y
 
 echo '******************************'
 echo extension manager
 echo '******************************'
 
 sudo apt install gnome-shell-extension-manager -y
-echo don't forget to install the following extensions
-echo   1. Alphabetical App Grid
-echo   2. Dash to Panel
-echo   3. Tiling Assistant
+echo 'install the following extensions'
+echo '  1. Alphabetical App Grid'
+echo '  2. Dash to Panel'
+echo '  3. Tiling Assistant'
 
 echo '******************************'
 echo firefox
@@ -104,8 +105,6 @@ sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo apt update -y
 sudo apt install ubuntu-cleaner -y
 
-
-
 echo '******************************'
 echo libreoffice
 echo '******************************'
@@ -127,6 +126,13 @@ sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/bruno.gpg --keyserver 
 echo 'deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable' | sudo tee /etc/apt/sources.list.d/bruno.list
 sudo apt update -y
 sudo apt install bruno
+
+echo '******************************'
+echo virtual box
+echo '******************************'
+
+wget -O /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
+sudo apt install /tmp/virtualbox.deb -y
 
 echo '******************************'
 echo phpstorm
