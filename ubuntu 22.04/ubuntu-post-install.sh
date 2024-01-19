@@ -58,15 +58,17 @@ sudo apt install filezilla -y
 sudo apt install kate -y
 sudo apt install workrave -y
 sudo apt install nextcloud-desktop -y
+sudo apt install gnome-tweaks -y
 
 echo '******************************'
 echo extension manager
 echo '******************************'
 
 sudo apt install gnome-shell-extension-manager -y
-# Alphabetical App Grid
-# Dash to Panel
-# Tiling Assistant
+echo don't forget to install the following extensions
+echo   1. Alphabetical App Grid
+echo   2. Dash to Panel
+echo   3. Tiling Assistant
 
 echo '******************************'
 echo firefox
@@ -101,6 +103,8 @@ echo '******************************'
 sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo apt update -y
 sudo apt install ubuntu-cleaner -y
+
+
 
 echo '******************************'
 echo libreoffice
@@ -191,8 +195,19 @@ sudo apt install /tmp/bluegriffon.deb -y
 echo '******************************'
 echo vscodium
 echo '******************************'
-wget -O /tmp/vscodium https://github.com/VSCodium/vscodium/releases/download/1.85.1.23348/codium_1.85.1.23348_amd64.deb
-sudo apt install /tmp/bluegriffon.deb -y
+
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.list
+
+sudo apt update -y
+sudo apt install codium -y
+
+# wget -O /tmp/vscodium https://github.com/VSCodium/vscodium/releases/download/1.85.1.23348/codium_1.85.1.23348_amd64.deb
+# sudo apt install /tmp/bluegriffon.deb -y
 
 echo '******************************'
 echo flatpak
