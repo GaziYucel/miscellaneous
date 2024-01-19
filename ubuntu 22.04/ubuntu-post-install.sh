@@ -133,6 +133,7 @@ echo '******************************'
 
 wget -O /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
 sudo apt install /tmp/virtualbox.deb -y
+echo 'install extension pack'
 
 echo '******************************'
 echo phpstorm
