@@ -1,0 +1,40 @@
+/*
+name: 
+transip.nl control panel
+
+custom included sites
+*://transip.nl/cp/*
+
+*/
+
+.container {
+    width: 100% !important;
+}
+
+.form-group > div:nth-child(1) {
+    width: 4%;
+}
+
+.form-group > div:nth-child(2) {
+    width: 15%;
+}
+
+.form-group > div:nth-child(3) {
+    width: 60%;
+}
+
+.form-group > div:nth-child(4) {
+    width: 5%;
+}
+
+.form-group > div:nth-child(5) {
+    width: 5%;
+}
+
+.form-group > div:nth-child(6) {
+    width: 5%;
+}
+
+.form-control {
+    padding: 5px;
+}
