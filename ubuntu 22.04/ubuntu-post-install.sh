@@ -40,6 +40,10 @@ sudo apt autoremove thunderbird --purge -y
 sudo apt autoremove gnome-calendar --purge -y
 sudo apt autoremove libreoffice* --purge -y
 
+sudo apt autoremove --purge
+sudo apt autoclean
+sudo apt clean
+
 echo '******************************'
 echo shared
 echo '******************************'
