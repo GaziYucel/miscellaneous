@@ -35,6 +35,13 @@ Write-Host "destinationRoot: "$destinationRoot
 Write-Host "date           : "$date
 Write-Host ""
 
+If(!(test-path -PathType container $sourceRoot)) {
+    Write-Host $sourceRoot" not found. Exiting."
+    Write-Host ""
+	exit
+}
+
+
 Read-Host -Prompt "Press any key to continue or CTRL + C to exit"
 
 If(!(test-path -PathType container $destinationRoot)) {
