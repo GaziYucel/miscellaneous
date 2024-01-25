@@ -24,7 +24,6 @@
     .\MoveFiles.ps1 -dateBefore '31/01/2022' -sourceRoot "C:\source\" -destinationRoot 'C:\destination\'
 #>
 
-
 $dateBefore      = '31/01/2022' # DD/MM/YYYY !!!test first
 $sourceRoot      = "C:\source\"
 $destinationRoot = 'C:\destination\'
