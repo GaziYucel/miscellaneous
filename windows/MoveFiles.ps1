@@ -1,3 +1,30 @@
+<#
+.SYNOPSIS
+    This PowerShell script moves files from a source directory to a 
+    destination directory based on their last write time.
+
+.DESCRIPTION
+    The script takes a specified date and moves files from the source directory (and its subdirectories) 
+    that were last modified before the specified date to the destination directory. It also creates 
+    the necessary directory structure in the destination directory.
+
+.PARAMETER $dateBefore
+    Specifies the date before which files will be moved. Format: DD/MM/YYYY.
+
+.PARAMETER $sourceRoot
+    Specifies the root directory containing the source files to be moved.
+
+.PARAMETER $destinationRoot
+    Specifies the root directory where files will be moved.
+
+.NOTES
+    File moves are logged to the console, indicating the source and destination paths.
+
+.EXAMPLE
+    .\MoveFiles.ps1 -dateBefore '31/01/2022' -sourceRoot "C:\source\" -destinationRoot 'C:\destination\'
+#>
+
+
 $dateBefore      = '31/01/2022' # DD/MM/YYYY !!!test first
 $sourceRoot      = "C:\source\"
 $destinationRoot = 'C:\destination\'
