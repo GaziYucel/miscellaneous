@@ -1,12 +1,12 @@
-$dateBefore      = '31/12/2022' # DD/MM/YYYY !!!test first
-$sourceRoot      = "B:\backup\ArchivedLogs\ctrl-app-cntrl\Script\"
-$destinationRoot = 'B:\backup\ArchivedLogs\ctrl-app-cntrl\Script_moved\'
+$dateBefore      = '31/01/2022' # DD/MM/YYYY !!!test first
+$sourceRoot      = "C:\source\"
+$destinationRoot = 'C:\destination\'
 
 $date = $dateBefore -as [datetime]
 
-Write-Host "sourceRoot: "$sourceRoot
+Write-Host "sourceRoot     : "$sourceRoot
 Write-Host "destinationRoot: "$destinationRoot
-Write-Host $date
+Write-Host "date           : "$date
 Write-Host ""
 
 Read-Host -Prompt "Press any key to continue or CTRL + C to exit"
@@ -15,7 +15,9 @@ If(!(test-path -PathType container $destinationRoot)) {
     New-Item -Path $destinationRoot -ItemType Directory
 }
 
-Foreach($file in (Get-ChildItem -Path $sourceRoot -Recurse)) {
+$files = Get-ChildItem -Path $sourceRoot -Recurse
+
+Foreach($file in $files) {
     If($file.LastWriteTime -lt $date.date)
     {
         If(Test-Path -Path $file.fullname -PathType Leaf){
@@ -30,7 +32,7 @@ Foreach($file in (Get-ChildItem -Path $sourceRoot -Recurse)) {
 
             Move-Item -Path $sourceFile -Destination $destinationFile -Force
 			
-			Write-Host $sourceFile" > "$destinationFile
+			Write-Host $file.name": "$sourceRoot" > "$destinationRoot
         }
     }
 }
