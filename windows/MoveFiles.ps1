@@ -41,7 +41,6 @@ If(!(test-path -PathType container $sourceRoot)) {
 	exit
 }
 
-
 Read-Host -Prompt "Press any key to continue or CTRL + C to exit"
 
 If(!(test-path -PathType container $destinationRoot)) {
