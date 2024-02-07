@@ -4,11 +4,11 @@
 
 .DESCRIPTION
     The script decompresses directories and files within a specified source directory using the `compact` command. 
-    It first decompresses directories recursively, then the source directory itself, and finally decompresses 
+    It first decompresses the sourceRoot if compressed, then decompresses directories recursively, and finally decompresses 
     individual files within the source directory.
 
 .PARAMETER $sourceRoot
-    Specifies the root directory containing compressed files and directories to be decompressed.
+    Specifies the root directory containing files and directories to be decompressed.
 
 .NOTES
     The script uses the `compact` command with the `/U` switch to decompress files and directories.
@@ -29,26 +29,29 @@ If(!(test-path -PathType container $sourceRoot)) {
 
 Read-Host -Prompt "Press any key to continue or CTRL + C to exit"
 
-# Decompress directories recursively
+# SourceRoot
 
-$directories = Get-ChildItem -Path $sourceRoot -Recurse -Directory | where-object {$_.Attributes -like "*Compressed*"}
+If(Get-Item -Path $sourceRoot |  where-object {$_.Attributes -like "*Compressed*"}){
+	compact /U $sourceRoot
+	Write-Host $sourceRoot": compressed"
+}
+
+# Directories
+
+$directories = Get-ChildItem -Path $sourceRoot -Recurse -Directory  | where-object {$_.Attributes -like "*Compressed*"}
 
 Foreach($directory in $directories) {
 	compact /U $directory.FullName
-	Write-Host $directory.name": decompressed" 
+	Write-Host $directory.name": compressed" 
 }
 
-# Decompress sourceRoot
+# Files
 
-compact /U $sourceRoot
-
-# Decompress files recursively
-
-$files = Get-ChildItem -Path $sourceRoot -Recurse | where-object {$_.Attributes -like "*Compressed*"}
+$files = Get-ChildItem -Path $sourceRoot -Recurse  | where-object {$_.Attributes -like "*Compressed*"}
 
 Foreach($file in $files) {
 	compact /U $file.FullName
-	Write-Host $file.name": decompressed" 
+	Write-Host $file.name": compressed" 
 }
 
 Read-Host -Prompt "Press any key to continue"

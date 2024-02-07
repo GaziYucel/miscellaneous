@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     The script compresses directories and files within a specified source directory using the `compact` command. 
-    It first the sourceRoot if not compressed, then compresses directories recursively, and finally compresses 
+    It first compresses the sourceRoot if not compressed, then compresses directories recursively, and finally compresses 
     individual files within the source directory.
 
 .PARAMETER $sourceRoot
@@ -29,14 +29,14 @@ If(!(test-path -PathType container $sourceRoot)) {
 
 Read-Host -Prompt "Press any key to continue or CTRL + C to exit"
 
-# Compress sourceRoot if not compressed
+# SourceRoot
 
 If(Get-Item -Path $sourceRoot |  where-object {$_.Attributes -notlike "*Compressed*"}){
 	compact /C $sourceRoot
 	Write-Host $sourceRoot": compressed"
 }
 
-# Compress directories recursively
+# Directories
 
 $directories = Get-ChildItem -Path $sourceRoot -Recurse -Directory  | where-object {$_.Attributes -notlike "*Compressed*"}
 
@@ -45,7 +45,7 @@ Foreach($directory in $directories) {
 	Write-Host $directory.name": compressed" 
 }
 
-# Compress files recursively
+# Files
 
 $files = Get-ChildItem -Path $sourceRoot -Recurse  | where-object {$_.Attributes -notlike "*Compressed*"}
 
