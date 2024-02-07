@@ -1,6 +1,23 @@
-# path
+<#
+.SYNOPSIS
+    This PowerShell script compresses directories and files within a specified source directory recursively.
 
-$sourceRoot = "B:\backup\ArchivedLogs\"
+.DESCRIPTION
+    The script compresses directories and files within a specified source directory using the `compact` command. 
+    It first compresses directories recursively, then the source directory itself, and finally compresses 
+    individual files within the source directory.
+
+.PARAMETER $sourceRoot
+    Specifies the root directory containing files and directories to be compressed.
+
+.NOTES
+    The script uses the `compact` command with the `/C` switch to compress files and directories.
+
+.EXAMPLE
+    .\CompressFiles.ps1 -sourceRoot "C:\backup\"
+#>
+
+$sourceRoot = "C:\backup\"
 
 Write-Host "sourceRoot: "$sourceRoot
 Write-Host ""

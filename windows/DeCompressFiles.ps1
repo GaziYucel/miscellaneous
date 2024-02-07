@@ -1,6 +1,23 @@
-# path
+<#
+.SYNOPSIS
+    This PowerShell script decompresses directories and files within a specified source directory recursively.
 
-$sourceRoot = "B:\backup\ArchivedLogs\"
+.DESCRIPTION
+    The script decompresses directories and files within a specified source directory using the `compact` command. 
+    It first decompresses directories recursively, then the source directory itself, and finally decompresses 
+    individual files within the source directory.
+
+.PARAMETER $sourceRoot
+    Specifies the root directory containing compressed files and directories to be decompressed.
+
+.NOTES
+    The script uses the `compact` command with the `/U` switch to decompress files and directories.
+
+.EXAMPLE
+    .\DecompressFiles.ps1 -sourceRoot "C:\backup\"
+#>
+
+$sourceRoot = "C:\backup\"
 
 Write-Host "sourceRoot: "$sourceRoot
 Write-Host ""
