@@ -1,12 +1,11 @@
 
 /**
- * This function is designed to wait for an HTML element specified by a CSS selector to be displayed on the page. 
- * It utilizes a recursive loop to continuously check for the presence of the element until it is found or a timeout occurs.
- * 
- * @param selector String The CSS selector of the HTML element to wait for.
- * @param callback Function The function to be called once the specified element is displayed.
- * @param checkFrequency Number The interval (ms) between each attempt to check for the element's presence.
- * @param timeOut Number|null The maximum time (ms) to wait for the element, if not provided than wait indefinitely.
+ * Waits for an HTML element to be present in the DOM and then execute a callback function.
+ *
+ * @param {string} selector - The CSS selector of the HTML element to wait for.
+ * @param {function} callback - The function to be executed once the element is found.
+ * @param {number} checkFrequency - The frequency (ms) at which to check for the element's presence.
+ * @param {number} timeOut - The maximum time (ms) to wait for the element before giving up.
  */
 function citationManagerWaitForElementToDisplay(selector, callback, checkFrequency, timeOut) {
     let startTime = Date.now();

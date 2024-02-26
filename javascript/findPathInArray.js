@@ -1,13 +1,20 @@
 /**
- * This function is designed to find the path of a specified key within a nested JavaScript object or array (obj). 
- * The result is returned as a dot-separated string representing the path to the key.
+ * Recursively searches for a specified key within a nested JavaScript object or array,
+ * and returns the path to the key as a dot-separated string.
  *
- * @param obj Object|Array The object or array in which the function searches for the specified key.
- * @param key String The key to be found within the object or array.
- * @returns String A dot-separated string representing the path to the specified key in the object or array.
+ * @param {Object|Array} obj - The object or array to search for the key.
+ * @param {string} key - The key to find within the object or array.
+ * @returns {string} - A dot-separated string representing the path to the specified key.
  */
-function findPathInArray(obj, key) {
+function findPathInArray(obj, key) {    
     const path = [];
+    
+    /**
+     * Helper function to recursively check if the key exists in the given object or array.
+     *
+     * @param {Object|Array} obj - The current object or array to search.
+     * @returns {boolean} - True if the key is found, false otherwise.
+     */
     const keyExists = (obj) => {
         if (!obj || (typeof obj !== "object" && !Array.isArray(obj))) {
             return false;
