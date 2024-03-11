@@ -115,7 +115,7 @@ echo '******************************'
 
 sudo rm -rf /tmp/libreoffice
 mkdir /tmp/libreoffice
-wget -c https://download.documentfoundation.org/libreoffice/stable/7.6.4/deb/x86_64/LibreOffice_7.6.4_Linux_x86-64_deb.tar.gz -O - | tar -xz -C /tmp/libreoffice --strip-components=1
+wget -c https://ftp.fau.de/tdf/libreoffice/stable/24.2.1/deb/x86_64/LibreOffice_24.2.1_Linux_x86-64_deb.tar.gz -O - | tar -xz -C /tmp/libreoffice --strip-components=1
 sudo dpkg -i /tmp/libreoffice/DEBS/*.deb
 
 echo '******************************'
