@@ -71,9 +71,11 @@ echo '******************************'
 
 sudo apt install gnome-shell-extension-manager -y
 echo 'install the following extensions'
-echo '  1. Alphabetical App Grid'
-echo '  2. Dash to Panel'
-echo '  3. Tiling Assistant'
+echo ' * Alphabetical App Grid'
+echo ' * Dash to Panel'
+echo ' * Tiling Assistant'
+echo ' * Desktop icons NG (DING)'
+echo ' * Ubuntu Appindicators'
 
 echo '******************************'
 echo firefox
