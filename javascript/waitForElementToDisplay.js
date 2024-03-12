@@ -7,7 +7,7 @@
  * @param {number} checkFrequency - The frequency (ms) at which to check for the element's presence.
  * @param {number} timeOut - The maximum time (ms) to wait for the element before giving up.
  */
-function citationManagerWaitForElementToDisplay(selector, callback, checkFrequency, timeOut) {
+function waitForElementToDisplay(selector, callback, checkFrequency, timeOut) {
     let startTime = Date.now();
     (function loopSearch() {
         if (document.querySelector(selector) != null) {
