@@ -66,6 +66,36 @@ sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
 
 echo '******************************'
+echo flatpak
+echo '******************************'
+
+sudo apt update -y
+sudo apt install flatpak -y
+sudo apt install gnome-software-plugin-flatpak -y
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+sudo apt update -y
+
+echo '******************************'
+echo flatpak apps
+echo '******************************'
+
+sudo flatpak install mattermost -y
+sudo flatpak install rocketchat -y
+sudo flatpak install signal -y
+sudo flatpak install slack -y
+sudo flatpak install ch.threema.threema-web-desktop -y
+sudo flatpak install whatsie -y
+sudo flatpak install gittyup -y
+sudo flatpak install metadatacleaner -y
+sudo flatpak install org.gimp.GIMP -y
+sudo flatpak install inkscape -y
+sudo flatpak install org.videolan.VLC -y
+sudo flatpak install joplin -y
+sudo flatpak install freefilesync -y
+sudo flatpak install com.protonvpn.www -y
+
+echo '******************************'
 echo extension manager
 echo '******************************'
 
@@ -221,39 +251,6 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
 
 sudo apt update -y
 sudo apt install codium -y
-
-# wget -O /tmp/vscodium https://github.com/VSCodium/vscodium/releases/download/1.85.1.23348/codium_1.85.1.23348_amd64.deb
-# sudo apt install /tmp/bluegriffon.deb -y
-
-echo '******************************'
-echo flatpak
-echo '******************************'
-
-sudo apt update -y
-sudo apt install flatpak -y
-sudo apt install gnome-software-plugin-flatpak -y
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-sudo apt update -y
-
-echo '******************************'
-echo flatpak apps
-echo '******************************'
-
-sudo flatpak install mattermost -y
-sudo flatpak install rocketchat -y
-sudo flatpak install signal -y
-sudo flatpak install slack -y
-sudo flatpak install ch.threema.threema-web-desktop -y
-sudo flatpak install whatsie -y
-sudo flatpak install gittyup -y
-sudo flatpak install metadatacleaner -y
-sudo flatpak install org.gimp.GIMP -y
-sudo flatpak install inkscape -y
-sudo flatpak install org.videolan.VLC -y
-sudo flatpak install joplin -y
-sudo flatpak install freefilesync -y
-sudo flatpak install com.protonvpn.www -y
 
 echo '******************************'
 echo cleanup / update / upgrade
