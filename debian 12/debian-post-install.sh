@@ -80,7 +80,6 @@ sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
 sudo flatpak install flathub phpstorm -y
 sudo flatpak install flathub pycharm-community -y
 sudo flatpak install flathub intellij-idea-Community -y
-sudo flatpak install flathub com.vscodium.codium -y
 sudo flatpak install flathub org.filezillaproject.Filezilla -y
 
 echo '******************************'
@@ -153,6 +152,20 @@ Terminal=false
 Type=Application
 StartupWMClass=jetbrains-rustrover-ce
 " | tee $HOME/.local/share/applications/jetbrains-rustrover-ce.desktop
+
+echo '******************************'
+echo vscodium
+echo '******************************'
+
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.list
+
+sudo apt update -y
+sudo apt install codium -y
 
 echo '******************************'
 echo cleanup / update / upgrade
