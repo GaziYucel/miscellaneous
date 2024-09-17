@@ -34,6 +34,7 @@ echo '******************************'
 
 sudo apt update -y
 
+sudo apt install remmina -y
 sudo apt install evolution evolution-ews -y
 sudo apt install workrave -y
 sudo apt install gnome-tweaks -y
