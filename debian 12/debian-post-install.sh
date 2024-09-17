@@ -35,7 +35,6 @@ echo '******************************'
 sudo apt update -y
 
 sudo apt install evolution evolution-ews -y
-sudo apt install filezilla -y
 sudo apt install workrave -y
 sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
@@ -82,6 +81,7 @@ sudo flatpak install flathub phpstorm -y
 sudo flatpak install flathub pycharm-community -y
 sudo flatpak install flathub intellij-idea-Community -y
 sudo flatpak install flathub com.vscodium.codium -y
+sudo flatpak install flathub org.filezillaproject.Filezilla -y
 
 echo '******************************'
 echo extension manager
