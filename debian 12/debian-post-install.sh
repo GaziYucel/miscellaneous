@@ -78,9 +78,6 @@ sudo flatpak install flathub flatsweep -y
 sudo flatpak install flathub flatseal -y
 sudo flatpak install flathub com.usebruno.Bruno -y
 sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
-sudo flatpak install flathub phpstorm -y
-sudo flatpak install flathub pycharm-community -y
-sudo flatpak install flathub intellij-idea-Community -y
 sudo flatpak install flathub org.filezillaproject.Filezilla -y
 
 echo '******************************'
@@ -134,13 +131,77 @@ wget -O /tmp/virtualbox_extension_pack.vbox-extpack https://download.virtualbox.
 echo 'install extension pack'
 
 echo '******************************'
+echo phpstorm
+echo '******************************'
+
+mkdir $HOME/apps
+rm -rf $HOME/apps/jetbrains-phpstorm
+mkdir jetbrains-phpstorm
+wget -c https://download.jetbrains.com/webide/PhpStorm-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-phpstorm --strip-components=1
+mv jetbrains-phpstorm $HOME/apps
+echo "[Desktop Entry]
+Name=PhpStorm
+Exec=$HOME/apps/jetbrains-phpstorm/bin/phpstorm %u
+Icon=$HOME/apps/jetbrains-phpstorm/bin/phpstorm.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Type=Application
+StartupWMClass=jetbrains-phpstorm
+" | tee $HOME/.local/share/applications/jetbrains-phpstorm.desktop
+
+echo '******************************'
+echo pycharm CE
+echo '******************************'
+
+mkdir $HOME/apps
+rm -rf $HOME/apps/jetbrains-pycharm-ce
+mkdir jetbrains-pycharm-ce
+wget -c https://download.jetbrains.com/python/pycharm-community-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-pycharm-ce --strip-components=1
+mv jetbrains-pycharm-ce $HOME/apps
+echo "[Desktop Entry]
+Name=PyCharm Community
+Exec=$HOME/apps/jetbrains-pycharm-ce/bin/pycharm %u
+Icon=$HOME/apps/jetbrains-pycharm-ce/bin/pycharm.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Type=Application
+StartupWMClass=jetbrains-pycharm-ce
+" | tee $HOME/.local/share/applications/jetbrains-pycharm-ce.desktop
+
+echo '******************************'
+echo intellij idea CE
+echo '******************************'
+
+mkdir $HOME/apps
+rm -rf $HOME/apps/jetbrains-idea-ce
+mkdir jetbrains-idea-ce
+wget -c https://download.jetbrains.com/idea/ideaIC-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-idea-ce --strip-components=1
+mv jetbrains-idea-ce $HOME/apps
+echo "[Desktop Entry]
+Name=IntelliJ IDEA Community
+Exec=$HOME/apps/jetbrains-idea-ce/bin/idea %u
+Icon=$HOME/apps/jetbrains-idea-ce/bin/idea.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Type=Application
+StartupWMClass=jetbrains-idea-ce
+" | tee $HOME/.local/share/applications/jetbrains-idea-ce.desktop
+
+
+echo '******************************'
 echo RustRover CE
 echo '******************************'
 
 mkdir $HOME/apps
 rm -rf $HOME/apps/jetbrains-rustrover-ce
 mkdir jetbrains-rustrover-ce
-wget -c https://download.jetbrains.com/rustrover/RustRover-2024.2.tar.gz -O - | tar -xz -C jetbrains-rustrover-ce --strip-components=1
+wget -c https://download.jetbrains.com/rustrover/RustRover-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-rustrover-ce --strip-components=1
 mv jetbrains-rustrover-ce $HOME/apps
 echo "[Desktop Entry]
 Name=IntelliJ IDEA Community
