@@ -1,4 +1,4 @@
-echo ubuntu customize
+echo debian customize
 
 echo Press enter to continue; read dummy;
 
