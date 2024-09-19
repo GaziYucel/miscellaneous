@@ -66,7 +66,7 @@ sudo flatpak install flathub org.signal.Signal -y
 sudo flatpak install flathub slack -y
 sudo flatpak install flathub ch.threema.threema-web-desktop -y
 sudo flatpak install flathub whatsie -y
-sudo flatpak install flathub gittyup -y
+sudo flatpak install flathub com.jetpackduba.Gitnuro -y
 sudo flatpak install flathub metadatacleaner -y
 sudo flatpak install flathub org.gimp.GIMP -y
 sudo flatpak install flathub inkscape -y
