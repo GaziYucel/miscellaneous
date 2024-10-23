@@ -40,6 +40,9 @@ sudo apt install workrave -y
 sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
 sudo apt install stacer -y
+sudo apt install dconf-editor -y
+sudo apt install hardinfo -y
+
 echo 'install the following apps manually'
 echo ' * balenaEtcher'
 echo ' * nextcloud-desktop'
@@ -59,7 +62,6 @@ echo '******************************'
 echo flatpak apps
 echo '******************************'
 
-# sudo flatpak install flathub org.libreoffice.LibreOffice -y
 sudo flatpak install flathub mattermost -y
 sudo flatpak install flathub rocketchat -y
 sudo flatpak install flathub org.signal.Signal -y
@@ -79,6 +81,8 @@ sudo flatpak install flathub flatseal -y
 sudo flatpak install flathub com.usebruno.Bruno -y
 sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
 sudo flatpak install flathub org.filezillaproject.Filezilla -y
+# sudo flatpak install flathub com.vscodium.codium -y
+# sudo flatpak install flathub org.libreoffice.LibreOffice -y
 
 echo '******************************'
 echo extension manager

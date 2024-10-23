@@ -64,6 +64,8 @@ sudo apt install workrave -y
 sudo apt install nextcloud-desktop -y
 sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
+sudo apt install dconf-editor -y
+sudo apt install hardinfo -y
 
 echo '******************************'
 echo flatpak
