@@ -100,11 +100,14 @@ echo '******************************'
 echo firefox
 echo '******************************'
 
-sudo apt autoremove firefox-esr -y
-sudo add-apt-repository ppa:mozillateam/ppa -y
-echo 'Package: *
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+sudo install -d -m 0755 /etc/apt/keyrings 
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla 
 sudo apt update -y
 sudo apt install firefox -y
 
@@ -112,14 +115,8 @@ echo '******************************'
 echo librewolf
 echo '******************************'
 
-distro=$(if echo " una bookworm vanessa focal jammy bullseye vera uma " | grep -q " $(lsb_release -sc) "; then lsb_release -sc; else echo focal; fi)
-wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/librewolf.gpg
-echo 'Types: deb
-URIs: https://deb.librewolf.net
-Suites: $distro
-Components: main
-Architectures: amd64
-Signed-By: /usr/share/keyrings/librewolf.gpg' | sudo tee /etc/apt/sources.list.d/librewolf.sources
+sudo apt update && sudo apt install extrepo -y
+sudo extrepo enable librewolf
 sudo apt update -y
 sudo apt install librewolf -y
 
@@ -133,6 +130,14 @@ sudo usermod -aG vboxusers $USER
 newgrp vboxusers
 wget -O /tmp/virtualbox_extension_pack.vbox-extpack https://download.virtualbox.org/virtualbox/7.1.0/Oracle_VirtualBox_Extension_Pack-7.1.0.vbox-extpack
 echo 'install extension pack'
+
+echo '******************************'
+echo Beyond Compare
+echo '******************************'
+
+wget https://www.scootersoftware.com/files/bcompare-5.0.2.30045_amd64.deb
+sudo apt update
+sudo apt install ./bcompare-5.0.2.30045_amd64.deb
 
 echo '******************************'
 echo phpstorm
