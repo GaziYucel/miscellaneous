@@ -3,17 +3,40 @@ echo debian customize
 echo Press enter to continue; read dummy;
 
 echo '******************************'
+echo remove snap
+echo '******************************'
+
+# sudo snap remove --purge firefox
+# sudo snap remove --purge gnome-3-38-2004
+# sudo snap remove --purge gnome-42-2204
+# sudo snap remove --purge snap-store
+# sudo snap remove --purge gtk-common-themes
+# sudo snap remove --purge snapd-desktop-integration
+# sudo snap remove --purge core20
+# sudo snap remove --purge core22
+# sudo snap remove --purge bare
+# sudo snap remove --purge snapd
+# sudo apt autoremove snapd --purge -y
+# echo '# This file forbids snapd from being installed by APT
+# Package: snapd
+# Pin: release a=*
+# Pin-Priority: -10' | sudo tee /etc/apt/preferences.d/nosnap.pref
+# rm -rf $HOME/snap
+
+echo '******************************'
 echo remove apps
 echo '******************************'
 
 sudo apt autoremove aisleriot --purge -y
 sudo apt autoremove gnome-mines --purge -y
+# sudo apt autoremove cheese --purge -y
 sudo apt autoremove gnome-mahjongg --purge -y
 sudo apt autoremove rhythmbox --purge -y
 sudo apt autoremove gnome-sudoku --purge -y
 sudo apt autoremove shotwell --purge -y
 sudo apt autoremove gnome-todo --purge -y
 sudo apt autoremove totem --purge -y
+#sudo apt autoremove thunderbird --purge -y
 sudo apt autoremove gnome-calendar --purge -y
 # sudo apt autoremove libreoffice* --purge -y
 
@@ -34,9 +57,12 @@ echo '******************************'
 
 sudo apt update -y
 
+sudo apt install gufw -y
 sudo apt install remmina -y
 sudo apt install evolution evolution-ews -y
+# sudo apt install filezilla -y
 sudo apt install workrave -y
+# sudo apt install nextcloud-desktop -y
 sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
 sudo apt install stacer -y
@@ -44,8 +70,9 @@ sudo apt install dconf-editor -y
 sudo apt install hardinfo -y
 
 echo 'install the following apps manually'
-echo ' * balenaEtcher'
-echo ' * nextcloud-desktop'
+echo ' * balenaEtcher.AppImage'
+echo ' * KeePassXC.AppImage'
+echo ' * nextcloud.AppImage'
 
 echo '******************************'
 echo flatpak
@@ -100,14 +127,10 @@ echo '******************************'
 echo firefox
 echo '******************************'
 
-sudo install -d -m 0755 /etc/apt/keyrings 
-wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-echo '
-Package: *
-Pin: origin packages.mozilla.org
-Pin-Priority: 1000
-' | sudo tee /etc/apt/preferences.d/mozilla 
+sudo add-apt-repository ppa:mozillateam/ppa -y
+echo 'Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 sudo apt update -y
 sudo apt install firefox -y
 
@@ -119,6 +142,28 @@ sudo apt update && sudo apt install extrepo -y
 sudo extrepo enable librewolf
 sudo apt update -y
 sudo apt install librewolf -y
+
+echo '******************************'
+echo libreoffice
+echo '******************************'
+
+sudo rm -rf /tmp/libreoffice
+mkdir /tmp/libreoffice
+wget -c https://ftp.fau.de/tdf/libreoffice/stable/24.2.1/deb/x86_64/LibreOffice_24.2.1_Linux_x86-64_deb.tar.gz -O - | tar -xz -C /tmp/libreoffice --strip-components=1
+sudo dpkg -i /tmp/libreoffice/DEBS/*.deb
+
+echo '******************************'
+echo bruno
+echo '******************************'
+
+sudo mkdir -p /etc/apt/keyrings
+sudo mkdir -p /root/.gnupg
+sudo find /root/.gnupg -type f -exec chmod 600 {} \;
+sudo find /root/.gnupg -type d -exec chmod 700 {} \;
+sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/bruno.gpg --keyserver keyserver.ubuntu.com --recv-keys 9FA6017ECABE0266
+echo 'deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable' | sudo tee /etc/apt/sources.list.d/bruno.list
+sudo apt update -y
+sudo apt install bruno
 
 echo '******************************'
 echo virtual box
@@ -202,7 +247,6 @@ Type=Application
 StartupWMClass=jetbrains-idea-ce
 " | tee $HOME/.local/share/applications/jetbrains-idea-ce.desktop
 
-
 echo '******************************'
 echo RustRover CE
 echo '******************************'
@@ -231,12 +275,18 @@ echo '******************************'
 wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
     | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
-
 echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
     | sudo tee /etc/apt/sources.list.d/vscodium.list
-
 sudo apt update -y
 sudo apt install codium -y
+
+echo '******************************'
+echo Firewall
+echo '******************************'
+
+sudo ufw enable -y
+sudo ufw allow from 127.0.0.1
+sudo ufw reload
 
 echo '******************************'
 echo cleanup / update / upgrade

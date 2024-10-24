@@ -57,15 +57,22 @@ echo '******************************'
 
 sudo apt update -y
 
+sudo apt install gufw -y
+sudo apt install remmina -y
 sudo apt install evolution evolution-ews -y
-sudo apt install filezilla -y
-sudo apt install kate -y
+# sudo apt install filezilla -y
 sudo apt install workrave -y
-sudo apt install nextcloud-desktop -y
+# sudo apt install nextcloud-desktop -y
 sudo apt install gnome-tweaks -y
 sudo apt install keepassxc -y
+sudo apt install stacer -y
 sudo apt install dconf-editor -y
 sudo apt install hardinfo -y
+
+echo 'install the following apps manually'
+echo ' * balenaEtcher.AppImage'
+echo ' * KeePassXC.AppImage'
+echo ' * nextcloud.AppImage'
 
 echo '******************************'
 echo flatpak
@@ -82,20 +89,27 @@ echo '******************************'
 echo flatpak apps
 echo '******************************'
 
-sudo flatpak install mattermost -y
-sudo flatpak install rocketchat -y
-sudo flatpak install signal -y
-sudo flatpak install slack -y
-sudo flatpak install ch.threema.threema-web-desktop -y
-sudo flatpak install whatsie -y
-sudo flatpak install gittyup -y
-sudo flatpak install metadatacleaner -y
-sudo flatpak install org.gimp.GIMP -y
-sudo flatpak install inkscape -y
-sudo flatpak install org.videolan.VLC -y
-sudo flatpak install joplin -y
-sudo flatpak install freefilesync -y
-sudo flatpak install com.protonvpn.www -y
+sudo flatpak install flathub mattermost -y
+sudo flatpak install flathub rocketchat -y
+sudo flatpak install flathub org.signal.Signal -y
+sudo flatpak install flathub slack -y
+sudo flatpak install flathub ch.threema.threema-web-desktop -y
+sudo flatpak install flathub whatsie -y
+sudo flatpak install flathub com.jetpackduba.Gitnuro -y
+sudo flatpak install flathub metadatacleaner -y
+sudo flatpak install flathub org.gimp.GIMP -y
+sudo flatpak install flathub inkscape -y
+sudo flatpak install flathub org.videolan.VLC -y
+sudo flatpak install flathub joplin -y
+sudo flatpak install flathub freefilesync -y
+sudo flatpak install flathub com.protonvpn.www -y
+sudo flatpak install flathub flatsweep -y
+sudo flatpak install flathub flatseal -y
+sudo flatpak install flathub com.usebruno.Bruno -y
+sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
+sudo flatpak install flathub org.filezillaproject.Filezilla -y
+# sudo flatpak install flathub com.vscodium.codium -y
+# sudo flatpak install flathub org.libreoffice.LibreOffice -y
 
 echo '******************************'
 echo extension manager
@@ -104,10 +118,10 @@ echo '******************************'
 sudo apt install gnome-shell-extension-manager -y
 echo 'install the following extensions'
 echo ' * Alphabetical App Grid'
+echo ' * AppIndicator and KStatusNotifierItem Support'
 echo ' * Dash to Panel'
-echo ' * Tiling Assistant'
 echo ' * Desktop icons NG (DING)'
-echo ' * Ubuntu Appindicators'
+echo ' * Tiling Assistant'
 
 echo '******************************'
 echo firefox
@@ -124,24 +138,10 @@ echo '******************************'
 echo librewolf
 echo '******************************'
 
-distro=$(if echo " una bookworm vanessa focal jammy bullseye vera uma " | grep -q " $(lsb_release -sc) "; then lsb_release -sc; else echo focal; fi)
-wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --batch --yes --dearmor -o /usr/share/keyrings/librewolf.gpg
-echo 'Types: deb
-URIs: https://deb.librewolf.net
-Suites: $distro
-Components: main
-Architectures: amd64
-Signed-By: /usr/share/keyrings/librewolf.gpg' | sudo tee /etc/apt/sources.list.d/librewolf.sources
+sudo apt update && sudo apt install extrepo -y
+sudo extrepo enable librewolf
 sudo apt update -y
 sudo apt install librewolf -y
-
-echo '******************************'
-echo ubuntu cleaner
-echo '******************************'
-
-sudo add-apt-repository ppa:gerardpuig/ppa -y
-sudo apt update -y
-sudo apt install ubuntu-cleaner -y
 
 echo '******************************'
 echo libreoffice
@@ -169,12 +169,20 @@ echo '******************************'
 echo virtual box
 echo '******************************'
 
-wget -O /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.0.14/virtualbox-7.0_7.0.14-161095~Ubuntu~jammy_amd64.deb
+wget -O /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.1.0/virtualbox-7.1_7.1.0-164728~Debian~bookworm_amd64.deb
 sudo apt install /tmp/virtualbox.deb -y
 sudo usermod -aG vboxusers $USER
 newgrp vboxusers
-wget -O /tmp/virtualbox_extension_pack.vbox-extpack https://download.virtualbox.org/virtualbox/7.0.14/Oracle_VM_VirtualBox_Extension_Pack-7.0.14.vbox-extpack
+wget -O /tmp/virtualbox_extension_pack.vbox-extpack https://download.virtualbox.org/virtualbox/7.1.0/Oracle_VirtualBox_Extension_Pack-7.1.0.vbox-extpack
 echo 'install extension pack'
+
+echo '******************************'
+echo Beyond Compare
+echo '******************************'
+
+wget https://www.scootersoftware.com/files/bcompare-5.0.2.30045_amd64.deb
+sudo apt update
+sudo apt install ./bcompare-5.0.2.30045_amd64.deb
 
 echo '******************************'
 echo phpstorm
@@ -183,16 +191,18 @@ echo '******************************'
 mkdir $HOME/apps
 rm -rf $HOME/apps/jetbrains-phpstorm
 mkdir jetbrains-phpstorm
-wget -c https://download.jetbrains.com/webide/PhpStorm-2023.3.2.tar.gz -O - | tar -xz -C jetbrains-phpstorm --strip-components=1
+wget -c https://download.jetbrains.com/webide/PhpStorm-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-phpstorm --strip-components=1
 mv jetbrains-phpstorm $HOME/apps
 echo "[Desktop Entry]
 Name=PhpStorm
-Exec=$HOME/apps/jetbrains-phpstorm/bin/phpstorm.sh
+Exec=$HOME/apps/jetbrains-phpstorm/bin/phpstorm %u
 Icon=$HOME/apps/jetbrains-phpstorm/bin/phpstorm.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
 Terminal=false
 Type=Application
 StartupWMClass=jetbrains-phpstorm
-Categories=Qt;Development;
 " | tee $HOME/.local/share/applications/jetbrains-phpstorm.desktop
 
 echo '******************************'
@@ -202,16 +212,18 @@ echo '******************************'
 mkdir $HOME/apps
 rm -rf $HOME/apps/jetbrains-pycharm-ce
 mkdir jetbrains-pycharm-ce
-wget -c https://download.jetbrains.com/python/pycharm-community-2023.3.2.tar.gz -O - | tar -xz -C jetbrains-pycharm-ce --strip-components=1
+wget -c https://download.jetbrains.com/python/pycharm-community-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-pycharm-ce --strip-components=1
 mv jetbrains-pycharm-ce $HOME/apps
 echo "[Desktop Entry]
 Name=PyCharm Community
-Exec=$HOME/apps/jetbrains-pycharm-ce/bin/pycharm.sh
+Exec=$HOME/apps/jetbrains-pycharm-ce/bin/pycharm %u
 Icon=$HOME/apps/jetbrains-pycharm-ce/bin/pycharm.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
 Terminal=false
 Type=Application
 StartupWMClass=jetbrains-pycharm-ce
-Categories=Qt;Development;
 " | tee $HOME/.local/share/applications/jetbrains-pycharm-ce.desktop
 
 echo '******************************'
@@ -221,24 +233,40 @@ echo '******************************'
 mkdir $HOME/apps
 rm -rf $HOME/apps/jetbrains-idea-ce
 mkdir jetbrains-idea-ce
-wget -c https://download.jetbrains.com/idea/ideaIC-2023.3.2.tar.gz -O - | tar -xz -C jetbrains-idea-ce --strip-components=1
+wget -c https://download.jetbrains.com/idea/ideaIC-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-idea-ce --strip-components=1
 mv jetbrains-idea-ce $HOME/apps
 echo "[Desktop Entry]
 Name=IntelliJ IDEA Community
-Exec=$HOME/apps/jetbrains-idea-ce/bin/idea.sh
+Exec=$HOME/apps/jetbrains-idea-ce/bin/idea %u
 Icon=$HOME/apps/jetbrains-idea-ce/bin/idea.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
 Terminal=false
 Type=Application
 StartupWMClass=jetbrains-idea-ce
-Categories=Qt;Development;
 " | tee $HOME/.local/share/applications/jetbrains-idea-ce.desktop
 
 echo '******************************'
-echo bluegriffon
+echo RustRover CE
 echo '******************************'
 
-wget -O /tmp/bluegriffon.deb http://bluegriffon.org/freshmeat/3.1/bluegriffon-3.1.Ubuntu18.04-x86_64.deb
-sudo apt install /tmp/bluegriffon.deb -y
+mkdir $HOME/apps
+rm -rf $HOME/apps/jetbrains-rustrover-ce
+mkdir jetbrains-rustrover-ce
+wget -c https://download.jetbrains.com/rustrover/RustRover-2024.2.1.tar.gz -O - | tar -xz -C jetbrains-rustrover-ce --strip-components=1
+mv jetbrains-rustrover-ce $HOME/apps
+echo "[Desktop Entry]
+Name=IntelliJ IDEA Community
+Exec=$HOME/apps/jetbrains-rustrover-ce/bin/idea %u
+Icon=$HOME/apps/jetbrains-rustrover-ce/bin/idea.png
+Version=1.0
+Type=Application
+Categories=Development;IDE;
+Terminal=false
+Type=Application
+StartupWMClass=jetbrains-rustrover-ce
+" | tee $HOME/.local/share/applications/jetbrains-rustrover-ce.desktop
 
 echo '******************************'
 echo vscodium
@@ -247,16 +275,24 @@ echo '******************************'
 wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
     | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
-
 echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
     | sudo tee /etc/apt/sources.list.d/vscodium.list
-
 sudo apt update -y
 sudo apt install codium -y
 
 echo '******************************'
+echo Firewall
+echo '******************************'
+
+sudo ufw enable -y
+sudo ufw allow from 127.0.0.1
+sudo ufw reload
+
+echo '******************************'
 echo cleanup / update / upgrade
 echo '******************************'
+
+sudo flatpak update
 
 sudo apt autoremove --purge
 sudo apt autoclean
