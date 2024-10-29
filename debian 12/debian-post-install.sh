@@ -3,6 +3,20 @@ echo debian customize
 echo Press enter to continue; read dummy;
 
 echo '******************************'
+echo Configure
+echo '******************************'
+
+echo 'add user to sudo'
+
+echo '******************************'
+echo Firewall
+echo '******************************'
+
+sudo ufw enable -y
+sudo ufw allow from 127.0.0.1
+sudo ufw reload
+
+echo '******************************'
 echo remove snap
 echo '******************************'
 
@@ -29,27 +43,20 @@ echo '******************************'
 
 sudo apt autoremove aisleriot --purge -y
 sudo apt autoremove gnome-mines --purge -y
-# sudo apt autoremove cheese --purge -y
+sudo apt autoremove cheese --purge -y
 sudo apt autoremove gnome-mahjongg --purge -y
 sudo apt autoremove rhythmbox --purge -y
 sudo apt autoremove gnome-sudoku --purge -y
 sudo apt autoremove shotwell --purge -y
 sudo apt autoremove gnome-todo --purge -y
 sudo apt autoremove totem --purge -y
-#sudo apt autoremove thunderbird --purge -y
+sudo apt autoremove thunderbird --purge -y
 sudo apt autoremove gnome-calendar --purge -y
-# sudo apt autoremove libreoffice* --purge -y
+sudo apt autoremove libreoffice* --purge -y
 
 sudo apt autoremove --purge
 sudo apt autoclean
 sudo apt clean
-
-echo '******************************'
-echo shared
-echo '******************************'
-sudo apt update -y
-sudo apt install -y libasound2 wget gnupg lsb-release apt-transport-https ca-certificates
-sudo apt install gjs libgjs0g python3-update-manager update-manager update-manager-core --reinstall
 
 echo '******************************'
 echo misc
@@ -68,11 +75,13 @@ sudo apt install keepassxc -y
 sudo apt install stacer -y
 sudo apt install dconf-editor -y
 sudo apt install hardinfo -y
+sudo apt install chromium -y
 
 echo 'install the following apps manually'
 echo ' * balenaEtcher.AppImage'
 echo ' * KeePassXC.AppImage'
 echo ' * nextcloud.AppImage'
+echo ' * XnView.AppImage'
 
 echo '******************************'
 echo flatpak
@@ -281,18 +290,43 @@ sudo apt update -y
 sudo apt install codium -y
 
 echo '******************************'
-echo Firewall
+echo LAMP
 echo '******************************'
 
-sudo ufw enable -y
-sudo ufw allow from 127.0.0.1
-sudo ufw reload
+sudo apt update -y
+
+sudo apt install apache2
+sudo apt install mariadb-server
+
+# PHP
+sudo apt install software-properties-common ca-certificates lsb-release apt-transport-https 
+LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php
+
+# PHP 8.2
+phpVersion="php8.2"
+sudo apt install "$phpVersion"
+sudo apt install "$phpVersion-mysql" "$phpVersion-mbstring" "$phpVersion-xml" "$phpVersion-curl" "libapache2-mod-$phpVersion" "$phpVersion-intl"
+
+# PHP 8.3
+phpVersion="php8.3"
+sudo apt install "$phpVersion"
+sudo apt install "$phpVersion-mysql" "$phpVersion-mbstring" "$phpVersion-xml" "$phpVersion-curl" "libapache2-mod-$phpVersion" "$phpVersion-intl"
+
+echo "change php version with: sudo update-alternatives --config php"
+
+echo '
+sudo mysql -u root
+USE mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password;
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('');
+FLUSH PRIVILEGES;
+exit;
+sudo mysql_secure_installation
+'
 
 echo '******************************'
 echo cleanup / update / upgrade
 echo '******************************'
-
-sudo flatpak update
 
 sudo apt autoremove --purge
 sudo apt autoclean
