@@ -1,0 +1,41 @@
+/* ==UserStyle==
+@name           Transip.nl CP Firewall
+@namespace      transip.nl/cp/vps/firwall
+@version        1.0.0
+@description    Show a full width rules
+@author         
+==/UserStyle== */
+
+@-moz-document regexp(".*transip.nl\\/cp\\/vps\\/firewall.*") {
+    .container {
+        width: 100% !important;
+    }
+
+    .form-group > div:nth-child(1) {
+        width: 80px;
+    }
+
+    .form-group > div:nth-child(2) {
+        width: 280px;
+    }
+
+    .form-group > div:nth-child(3) {
+        width: calc(100% - 550px);
+    }
+
+    .form-group > div:nth-child(4) {
+        width: 70px;
+    }
+
+    .form-group > div:nth-child(5) {
+        width: 60px;
+    }
+
+    .form-group > div:nth-child(6) {
+        width: 20px;
+    }
+
+    .form-control {
+        padding: 5px;
+    }
+}

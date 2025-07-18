@@ -1,0 +1,89 @@
+/* ==UserStyle==
+@name           Jira Condensed
+@namespace      atlassian.net/jira
+@version        1.0.0
+@description    Condenses tickets by removing some clutter
+@author         
+==/UserStyle== */
+
+@-moz-document regexp(".*\\/jira\\/.*") {
+    .issue-link-key,
+    .ghx-issue-fields .ghx-key {
+        display: none !important;
+    }
+
+    .ghx-issue {
+        display: inline-flex;
+        width: calc(100% - 30px);
+    }
+
+    .ghx-issue-subtask {
+        width: calc(100% - 32px);
+        margin: 3px 6px;
+    }
+
+    .ghx-issue .ghx-issue-content {
+        width: calc(100% - 54px);
+    }
+
+    .ghx-issue .ghx-issue-content .ghx-issue-fields {
+        padding: 0;
+    }
+
+
+    .ghx-issue .ghx-issue-content .ghx-issue-fields .ghx-summary .ghx-inner {
+        line-height: 1.5em;
+        max-height: unset;
+    }
+
+
+    .ghx-issue .ghx-card-footer {
+        width: 54px;
+        flex-wrap: unset;
+        margin-top: 0;
+    }
+
+    .ghx-issue .ghx-card-footer > div {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .ghx-issue .ghx-avatar,
+    .ghx-issue .ghx-type,
+    .ghx-issue .ghx-flags {
+        position: relative;
+        right: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 18px;
+        height: 18px;
+        min-width: unset;
+        min-height: unset;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ghx-issue .ghx-avatar img,
+    .ghx-issue .ghx-type img,
+    .ghx-issue .ghx-flags img {
+        position: relative;
+        right: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 18px;
+        height: 18px;
+        min-width: unset;
+        min-height: unset;
+        vertical-align: unset;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ghx-detail-view.gh-editable-detail-view .ghx-detail-nav-content {
+        margin-bottom: 120px;
+    }
+}
