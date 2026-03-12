@@ -78,14 +78,15 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo apt update
 
 sudo flatpak install flathub ch.threema.threema-web-desktop -y
-sudo flatpak install flathub chat.rocket.RocketChat -y
+# sudo flatpak install flathub chat.rocket.RocketChat -y
 sudo flatpak install flathub com.github.tchx84.Flatseal -y
-sudo flatpak install flathub com.jetpackduba.Gitnuro -y
+# sudo flatpak install flathub com.jetpackduba.Gitnuro -y
+sudo flatpak install flathub com.github.Murmele.Gittyup -y
 sudo flatpak install flathub com.ktechpit.whatsie -y
 sudo flatpak install flathub com.mattermost.Desktop -y
 sudo flatpak install flathub com.nextcloud.desktopclient.nextcloud -y
 sudo flatpak install flathub com.protonvpn.www -y
-sudo flatpak install flathub com.slack.Slack
+sudo flatpak install flathub com.slack.Slack -y
 sudo flatpak install flathub com.usebruno.Bruno -y
 sudo flatpak install flathub fr.romainvigier.MetadataCleaner -y
 sudo flatpak install flathub io.dbeaver.DBeaverCommunity -y
@@ -98,22 +99,29 @@ sudo flatpak install flathub org.gimp.GIMP -y
 sudo flatpak install flathub org.inkscape.Inkscape -y
 sudo flatpak install flathub org.signal.Signal -y
 sudo flatpak install flathub org.videolan.VLC -y
+sudo flatpak install flathub com.xnview.XnViewMP -y
+sudo flatpak install flathub im.riot.Riot -y
+sudo flatpak install flathub io.github.ungoogled_software.ungoogled_chromium -y
+sudo flatpak install flathub org.gnome.Evolution -y
+sudo flatpak install flathub org.cryptomator.Cryptomator -y
 
 echo '******************************'
 echo deb apps
 echo '******************************'
 
 sudo apt install gufw -y
-sudo apt install evolution evolution-ews -y
+# sudo apt install evolution evolution-ews -y
 sudo apt install gnome-tweaks -y
 sudo apt install stacer -y
 sudo apt install dconf-editor -y
 sudo apt install hardinfo -y
 sudo apt install ubuntu-restricted-extras -y
+sudo apt install ffmpeg -y 
+sudo apt install synaptic -y
+sudo apt install gnome-snapshot -y
 
 echo 'install the following apps manually'
 echo ' * balenaEtcher.AppImage'
-echo ' * XnView.AppImage'
 
 echo '******************************'
 echo signal messenger
