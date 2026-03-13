@@ -120,6 +120,13 @@ sudo apt install ffmpeg -y
 sudo apt install synaptic -y
 sudo apt install gnome-snapshot -y
 
+sudo apt install gnome-shell-extension-manager -y
+echo 'install the following extensions'
+echo ' * Alphabetical App Grid'
+echo ' * AppIndicator and KStatusNotifierItem Support'
+echo ' * Dash to Panel'
+echo ' * Desktop icons NG (DING)'
+
 echo 'install the following apps manually'
 echo ' * balenaEtcher.AppImage'
 
@@ -203,18 +210,6 @@ wget https://www.scootersoftware.com/scootersoftware.list
 sudo cp scootersoftware.list /etc/apt/sources.list.d/
 sudo apt update
 sudo apt install bcompare -y
-
-
-echo '******************************'
-echo extension manager
-echo '******************************'
-
-sudo apt install gnome-shell-extension-manager -y
-echo 'install the following extensions'
-echo ' * Alphabetical App Grid'
-echo ' * AppIndicator and KStatusNotifierItem Support'
-echo ' * Dash to Panel'
-echo ' * Desktop icons NG (DING)'
 
 echo '******************************'
 echo git
